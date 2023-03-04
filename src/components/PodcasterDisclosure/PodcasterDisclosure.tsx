@@ -6,7 +6,40 @@ import {
   IconBrandPatreon,
   IconBrandYoutube,
 } from "@tabler/icons-react";
+import clsx from "clsx";
 import Link from "next/link";
+import { ReactNode } from "react";
+
+const PODCASTS: LinkTagProp[] = [
+  {
+    link: "https://podcasts.apple.com/us/podcast/lex-fridman-podcast/id1434243584",
+    icon: <IconBrandApplePodcast size={36} />,
+    actionLabel: "Listen on",
+    label: "Apple Podcast",
+    twGradient: "bg-gradient-to-r from-purple-400 to-fuchsia-500",
+  },
+  {
+    link: "https://open.spotify.com/show/2MAi0BvDc6GTFvKFPXnkCL",
+    icon: <IconBrandSpotify size={36} />,
+    actionLabel: "Listen on",
+    label: "Spotify",
+    twGradient: "bg-gradient-to-r from-green-400 to-emerald-500",
+  },
+  {
+    link: "https://www.youtube.com/@lexfridman/featured",
+    icon: <IconBrandYoutube size={36} />,
+    actionLabel: "Listen on",
+    label: "Youtube",
+    twGradient: "bg-gradient-to-r from-red-400 to-rose-500",
+  },
+  {
+    link: "https://lexfridman.com/feed/podcast/",
+    icon: <IconRss size={36} stroke={3} />,
+    actionLabel: "Subscribe via",
+    label: "RSS Feed",
+    twGradient: "bg-gradient-to-r from-orange-500 to-yellow-500",
+  },
+];
 
 export const PodcasterDisclosure = () => {
   return (
@@ -23,7 +56,10 @@ export const PodcasterDisclosure = () => {
       </span>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <Link
+        {PODCASTS.map((props) => (
+          <LinkTag key={props.label} {...props} />
+        ))}
+        {/* <Link
           className="flex gap-2"
           href="https://podcasts.apple.com/us/podcast/lex-fridman-podcast/id1434243584"
         >
@@ -70,8 +106,41 @@ export const PodcasterDisclosure = () => {
             <span className="text-sm text-zinc-500">Subscribe via</span>
             <span className="text-2xl font-bold">RSS Feed</span>
           </span>
-        </Link>
+        </Link> */}
       </div>
     </div>
+  );
+};
+
+type LinkTagProp = {
+  link: string;
+  icon: ReactNode;
+  actionLabel: string;
+  label: string;
+  twGradient: string;
+};
+
+const LinkTag = ({
+  link,
+  icon,
+  actionLabel,
+  label,
+  twGradient,
+}: LinkTagProp) => {
+  return (
+    <Link className="flex gap-2" href={link}>
+      <span
+        className={clsx(
+          "grid place-items-center rounded-xl h-16 w-16",
+          twGradient
+        )}
+      >
+        {icon}
+      </span>
+      <span className="flex flex-col justify-center">
+        <span className="text-sm font-medium text-zinc-500">{actionLabel}</span>
+        <span className="text-2xl font-bold">{label}</span>
+      </span>
+    </Link>
   );
 };
