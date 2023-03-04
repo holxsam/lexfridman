@@ -12,6 +12,7 @@ import {
 import Image from "next/image";
 import { useRef, useState } from "react";
 import LEXFRIDMAN from "../../../public/lexfridmancrop.png";
+import { PodcasterDisclosure } from "../PodcasterDisclosure/PodcasterDisclosure";
 import { ResearchItem, RESEARCH_ITEMS } from "../Research/data";
 import { ScientistDisclosure } from "../ScientistDisclosure/ScientistDisclosure";
 import { TeacherDisclosure } from "../TeacherDisclosure/TeacherDisclosure";
@@ -183,9 +184,7 @@ export const HeroSection = () => {
               >
                 {section === 0 && <ScientistDisclosure />}
                 {section === 1 && <TeacherDisclosure />}
-                {section === 2 && (
-                  <div className=" w-full bg-blue-500 rounded-3xl">three</div>
-                )}
+                {section === 2 && <PodcasterDisclosure />}
                 {section === 3 && (
                   <div className=" w-full bg-yellow-500 rounded-3xl">four</div>
                 )}

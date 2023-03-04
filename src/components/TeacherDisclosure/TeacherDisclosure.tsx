@@ -9,7 +9,7 @@ export const TeacherDisclosure = () => {
   return (
     <div className="relative flex flex-col gap-6 h-full w-full">
       <span className=" whitespace-nowrap text-[clamp(40px,5vw,60px)] [line-height:1]">
-        <span className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 via-primary-500 to-indigo-500 animate-gradient-x">
+        <span className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-sky-500 via-emerald-500 to-green-500 animate-gradient-x">
           {"Learn with Lex"}
         </span>
       </span>

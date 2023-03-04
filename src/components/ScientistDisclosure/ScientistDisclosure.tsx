@@ -16,7 +16,14 @@ export const ScientistDisclosure = () => {
   return (
     <div className="relative flex flex-col h-min w-full rounded-3xl">
       <span className="flex flex-col">
-        <span className="font-bold text-4xl">{"Lex Fridman"}</span>
+        {/* <span className="font-extrabold text-4xl text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-500 via-blue-600 to-fuchsia-500 animate-gradient-x">
+          {"Lex Fridman"}
+        </span> */}
+
+        <span className="text-[clamp(40px,5vw,60px)] [line-height:1] font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-500 via-blue-500 to-purple-500 animate-gradient-x">
+          {"Lex Fridman"}
+        </span>
+
         <span className="font-extralight text-xl text-zinc-500">
           {"Pronounced /freed·man/"}
         </span>
