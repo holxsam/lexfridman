@@ -14,11 +14,11 @@ const slideAroundTransition: Transition = {
 
 export const ScientistDisclosure = () => {
   return (
-    <div className="relative flex flex-col h-fullzz h-min w-full zzbg-red-500 bg-gradient-to-brzzfrom-green-400/80 to-emerald-500/80 rounded-3xl">
-      <span className="text-3xl whitespace-nowrap">
-        <span className="font-bold ">{"Lex Fridman"}</span>
+    <div className="relative flex flex-col h-min w-full rounded-3xl">
+      <span className="flex flex-col">
+        <span className="font-bold text-4xl">{"Lex Fridman"}</span>
         <span className="font-extralight text-xl text-zinc-500">
-          {" /freed·man/"}
+          {"Pronounced /freed·man/"}
         </span>
       </span>
       <span className="whitespace-nowrap text-zinc-200 pt-2">

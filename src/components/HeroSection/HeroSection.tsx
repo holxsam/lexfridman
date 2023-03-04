@@ -13,7 +13,8 @@ import Image from "next/image";
 import { useRef, useState } from "react";
 import LEXFRIDMAN from "../../../public/lexfridmancrop.png";
 import { ResearchItem, RESEARCH_ITEMS } from "../Research/data";
-import { ScientistDisclosure } from "../ScientistDislosure/ScientistDisclosure";
+import { ScientistDisclosure } from "../ScientistDisclosure/ScientistDisclosure";
+import { TeacherDisclosure } from "../TeacherDisclosure/TeacherDisclosure";
 
 type SectionType = {
   id: string;
@@ -58,9 +59,6 @@ const animProps: AnimationProps = {
 
 /**
  * 
-
-Teacher:
-show video of courses he teaches
 
 Podcast
 a collage of the guest he’s talked to
@@ -176,7 +174,7 @@ export const HeroSection = () => {
               </button>
             ))}
           </div>
-          <div className="z-0 relative flex flex-col w-full">
+          <div className="z-0 relative flex flex-col w-full min-h-[500px]">
             <AnimatePresence>
               <motion.div
                 key={section}
@@ -184,9 +182,7 @@ export const HeroSection = () => {
                 className="absolute flex w-full h-full"
               >
                 {section === 0 && <ScientistDisclosure />}
-                {section === 1 && (
-                  <div className=" w-full bg-green-500 rounded-3xl">two</div>
-                )}
+                {section === 1 && <TeacherDisclosure />}
                 {section === 2 && (
                   <div className=" w-full bg-blue-500 rounded-3xl">three</div>
                 )}
