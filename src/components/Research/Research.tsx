@@ -37,17 +37,20 @@ const DraggableList = forwardRef<HTMLUListElement, { children: ReactNode }>(
 
 export const Research = () => {
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-8 ">
       <div className="flex pack-content">
-        <h2 className="text-4xl font-bold">{"Research & Publications"}</h2>
+        <h2 id="research" className="text-4xl font-bold scroll-mt-12">
+          {"Research & Publications"}
+        </h2>
       </div>
 
-      <div className=" overflow-x-auto custom-scrollbar-tiny no-scrollbar pb-8">
+      <div className=" overflow-x-auto  custom-scrollbar-tiny no-scrollbar pb-8 ">
         <div className="flex gap-10 pack-content">
           {RESEARCH_ITEMS.map((item) => (
             <li
+              id={item.title}
               className={clsx(
-                "flex flex-col gap-4 min-w-[320px]",
+                "flex flex-col gap-4 min-w-[320px] scroll-pt-20zz scroll-mt-20",
                 "bg-neutral-100zz"
                 // "bg-gradient-to-b from-neutral-100 to-white"
                 // "shadow-lg"

@@ -3,18 +3,17 @@ import { IconChevronRight } from "@tabler/icons-react";
 import clsx from "clsx";
 import {
   AnimatePresence,
+  AnimationProps,
   motion,
+  Transition,
   useScroll,
   useTransform,
 } from "framer-motion";
 import Image from "next/image";
 import { useRef, useState } from "react";
 import LEXFRIDMAN from "../../../public/lexfridmancrop.png";
-// Lex Fridman
-// -Scientist
-// -Teacher
-// -Podcaster
-// -Human
+import { ResearchItem, RESEARCH_ITEMS } from "../Research/data";
+import { ScientistDisclosure } from "../ScientistDislosure/ScientistDisclosure";
 
 type SectionType = {
   id: string;
@@ -30,6 +29,48 @@ const sections: SectionType[] = [
 
 const trackerClass = "hero-tracker";
 
+const Orb = ({
+  delay = 0,
+  className,
+}: {
+  delay: number;
+  className: string;
+}) => {
+  return (
+    <motion.div
+      className={className}
+      animate={{ opacity: [0.05, 0.1] }}
+      transition={{
+        repeat: Infinity,
+        repeatType: "reverse",
+        duration: 2,
+        delay,
+      }}
+    />
+  );
+};
+
+const animProps: AnimationProps = {
+  initial: { x: "-100%", opacity: 0 },
+  animate: { x: 0, opacity: 1 },
+  exit: { x: "100%", opacity: 0 },
+};
+
+/**
+ * 
+
+Teacher:
+show video of courses he teaches
+
+Podcast
+a collage of the guest he’s talked to
+
+Human
+show videos of lex playing guitar
+show videos of lex black belt
+
+ */
+
 export const HeroSection = () => {
   const ref = useRef(document.body);
 
@@ -41,7 +82,7 @@ export const HeroSection = () => {
   const sectionSelected = section >= 0 && section <= 3;
 
   return (
-    <section className="relative flex flex-col bg-neutral-100zz h-[700px]">
+    <section className="-z-10 relative flex flex-col justify-center h-min min-h-[calc(100vh-4rem)]">
       <div className="-z-10 absolute inset-0 -top-16">
         <motion.div
           className="absolute inset-x-0 top-0 max-w-[1280px] overflow-hidden lg:bottom-auto lg:right-0 lg:left-auto lg:w-[80%]"
@@ -66,41 +107,36 @@ export const HeroSection = () => {
               ></iframe>
             </div>
           </div>
-          <div className="absolute -inset-[3px] bg-gradient-to-b from-transparent via-zinc-900/50zz via-transparent to-zinc-900"></div>
-          <div className="absolute -inset-[3px] hidden bg-gradient-to-l from-transparent via-zinc-900/50zz via-transparent to-zinc-900 lg:block"></div>
+          <div className="absolute -inset-[3px] bg-gradient-to-b from-transparent via-zinc-900/50 zzvia-transparent to-zinc-900"></div>
+          <div className="absolute -inset-[3px] hidden bg-gradient-to-l from-transparent via-zinc-900/50 zzvia-transparent to-zinc-900 lg:block"></div>
         </motion.div>
 
         <div className="z-10 absolute inset-0">
-          <div className="-z-10 w-[400px] h-72 rounded-full blur-3xl bg-blue-500 bg-gradient-to-rzz from-blue-500 to-yellow-500 opacity-5 absolute  -bottom-16 left-[40%]"></div>
-          <div className="-z-10 w-52 h-52 rounded-full blur-3xl bg-yellow-500 bg-gradient-to-rzz from-blue-500 to-yellow-500 opacity-5 absolute  -bottom-16 left-[65%]"></div>
-          <div className="-z-10 w-[400px] h-52 rounded-full blur-3xl bg-green-500 bg-gradient-to-rzz from-blue-500 to-green-500 opacity-5 absolute bottom-0 -right-32"></div>
+          <Orb
+            delay={3}
+            className="-z-10 w-[400px] h-72 rounded-full blur-3xl bg-blue-500 bg-gradient-to-rzz from-blue-500 to-yellow-500 opacity-5 absolute  -bottom-16 left-[40%]"
+          />
+          <Orb
+            delay={2}
+            className="-z-10 w-52 h-52 rounded-full blur-3xl bg-yellow-500 bg-gradient-to-rzz from-blue-500 to-yellow-500 opacity-5 absolute  -bottom-16 left-[65%]"
+          />
+          <Orb
+            delay={1.5}
+            className="-z-10 w-[400px] h-52 rounded-full blur-3xl bg-green-500 bg-gradient-to-rzz from-blue-500 to-green-500 opacity-5 absolute bottom-0 -right-32"
+          />
         </div>
-        {/* </motion.div> */}
       </div>
-      <div className="pack-content flex gap-16 h-full w-full">
-        <div className=" flex flex-col justify-center h-full">
-          <div className="relative flex flex-col">
-            <motion.div
-              animate={{ opacity: [0.05, 0.1] }}
-              transition={{
-                repeat: Infinity,
-                repeatType: "reverse",
-                duration: 2,
-              }}
+      <div className="pack-content flex items-center h-full w-full">
+        <div className="relative flex flex-col lg:flex-row gap-8 lg:gap-32 justify-center h-min w-full">
+          <div className="z-10 relative flex flex-col">
+            <Orb
+              delay={0}
               className="-z-10 w-60 h-60 rounded-full blur-3xl bg-yellow-500 opacity-10 absolute top-[-10%] left-[-10%]"
-            ></motion.div>
-            <motion.div
-              animate={{ opacity: [0.05, 0.1] }}
-              transition={{
-                repeat: Infinity,
-                repeatType: "reverse",
-                duration: 2,
-                delay: 1,
-              }}
+            />
+            <Orb
+              delay={1}
               className="-z-10 w-96 h-72 rounded-full blur-3xl bg-pink-500 opacity-5 absolute top-[50%] left-[10%]"
-            ></motion.div>
-            {/* <div className="-z-10 w-[800px] h-72 rounded-full blur-3xl bg-blue-500zz bg-gradient-to-r from-blue-500 to-green-500 opacity-10 absolute top-[80%] left-[85%]"></div> */}
-            {/* <div className="-z-10 w-96 h-72 rounded-full blur-3xl bg-green-500 opacity-10 absolute top-[100%] left-[85%]"></div> */}
+            />
             {sections.map((sec, i) => (
               <button
                 key={sec.id}
@@ -110,8 +146,9 @@ export const HeroSection = () => {
                 )}
                 onFocus={(e) => setSection(i)}
                 onBlur={(e) => {
-                  if (!e.relatedTarget?.classList.contains(trackerClass))
-                    setSection(-1);
+                  if (!e.relatedTarget?.classList.contains(trackerClass)) {
+                  }
+                  // setSection(-1);
                 }}
               >
                 {section === i && (
@@ -139,18 +176,27 @@ export const HeroSection = () => {
               </button>
             ))}
           </div>
+          <div className="z-0 relative flex flex-col w-full">
+            <AnimatePresence>
+              <motion.div
+                key={section}
+                {...animProps}
+                className="absolute flex w-full h-full"
+              >
+                {section === 0 && <ScientistDisclosure />}
+                {section === 1 && (
+                  <div className=" w-full bg-green-500 rounded-3xl">two</div>
+                )}
+                {section === 2 && (
+                  <div className=" w-full bg-blue-500 rounded-3xl">three</div>
+                )}
+                {section === 3 && (
+                  <div className=" w-full bg-yellow-500 rounded-3xl">four</div>
+                )}
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
-        {/* <div className="flex h-full w-full bg-red-500"></div> */}
-        {/* <div className="flex justify-center items-end h-full w-full">
-          <Image
-            src={LEXFRIDMAN}
-            className="opacity-40zz"
-            alt="picture of lex fridman"
-            width={300}
-            height={300}
-            quality={100}
-          />
-        </div> */}
       </div>
     </section>
   );

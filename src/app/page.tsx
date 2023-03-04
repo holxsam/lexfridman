@@ -12,11 +12,11 @@ import LEXFRIDMAN from "../../public/lexfridmancrop.png";
 
 export default function Home() {
   return (
-    <div className="flex flex-col gap-8">
+    <div className="isolate flex flex-col gap-8">
       <HeroSection />
 
       <Research />
-      <Research />
+      {/* <Research /> */}
 
       <div className="overflow-x-hidden">
         <div className="flex flex-col gap-4 pack-content ">
