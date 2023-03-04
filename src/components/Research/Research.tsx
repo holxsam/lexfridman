@@ -39,7 +39,7 @@ export const Research = () => {
   return (
     <div className="flex flex-col gap-8">
       <div className="flex pack-content">
-        <h2 className="text-4xl font-extrabold">{"Research & Publications"}</h2>
+        <h2 className="text-4xl font-bold">{"Research & Publications"}</h2>
       </div>
 
       <div className=" overflow-x-auto custom-scrollbar-tiny no-scrollbar pb-8">
@@ -112,7 +112,7 @@ export const Research = () => {
               </figure>
 
               <div className="flex flex-col gap-1 p-4zz">
-                <h3 className="font-bold ">{item.title}</h3>
+                <h3 className="font-bold">{item.title}</h3>
                 <p className="text-sm text-neutral-500">{item.summary}</p>
               </div>
               {/* <div className="flex-1 flex"> */}
