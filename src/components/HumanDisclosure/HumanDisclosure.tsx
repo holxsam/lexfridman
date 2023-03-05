@@ -8,12 +8,14 @@ export const HumanDisclosure = () => {
           {"Enjoyment"}
         </span>
       </span>
-      <span className="flex flex-col text-3xl text-zinc-500 font-bold">
-        {""}
+      <span className="flex flex-col text-2xl text-zinc-500 font-medium">
+        {
+          "In my free time I enjoy playing the guitar and practicing jiu jitsu and judo."
+        }
       </span>
 
       <div className="rounded-3xl overflow-hidden">
-        <iframe
+        {/* <iframe
           width="560"
           height="315"
           src="https://www.youtube.com/embed/bCA54RIkpTo?&mute=1&muted=1&controls=1&showinfo=0&modestbranding=1&loop=1"
@@ -21,7 +23,7 @@ export const HumanDisclosure = () => {
           // frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           // allowfullscreen
-        ></iframe>
+        ></iframe> */}
       </div>
     </div>
   );

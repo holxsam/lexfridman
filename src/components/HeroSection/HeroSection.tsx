@@ -1,21 +1,18 @@
 "use client";
+import { useHasMounted } from "@/hooks/useHasMounted";
 import { Tab } from "@headlessui/react";
-import { IconChevronRight } from "@tabler/icons-react";
 import clsx from "clsx";
 import {
   AnimatePresence,
   AnimationProps,
   motion,
-  Transition,
   useScroll,
   useTransform,
 } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import LEXFRIDMAN from "../../../public/lexfridmancrop.png";
 import { HumanDisclosure } from "../HumanDisclosure/HumanDisclosure";
 import { PodcasterDisclosure } from "../PodcasterDisclosure/PodcasterDisclosure";
-import { ResearchItem, RESEARCH_ITEMS } from "../Research/data";
 import { ScientistDisclosure } from "../ScientistDisclosure/ScientistDisclosure";
 import { TeacherDisclosure } from "../TeacherDisclosure/TeacherDisclosure";
 
@@ -31,100 +28,19 @@ const sections: SectionType[] = [
   { id: "human", label: "Human" },
 ];
 
-const trackerClass = "hero-tracker";
-
-const Orb = ({
-  delay = 0,
-  className,
-}: {
-  delay: number;
-  className: string;
-}) => {
-  return (
-    <motion.div
-      className={className}
-      animate={{ opacity: [0.05, 0.1] }}
-      transition={{
-        repeat: Infinity,
-        repeatType: "reverse",
-        duration: 2,
-        delay,
-      }}
-    />
-  );
-};
-
 const animProps: AnimationProps = {
   initial: { x: "100%", opacity: 0, filter: "blur(10px)" },
   animate: { x: 0, opacity: 1, filter: "blur(0px)" },
   exit: { x: "-25%", opacity: 0, filter: "blur(10px)" },
 };
 
-/**
- * 
-
-Podcast
-a collage of the guest he’s talked to
-
-Human
-show videos of lex playing guitar
-show videos of lex black belt
-
- */
-
 export const HeroSection = () => {
-  const scrollRef = useRef<HTMLElement>(null!);
-  const { scrollY } = useScroll({ container: scrollRef, layoutEffect: false });
-  const y = useTransform(scrollY, [0, 600], ["0%", "50%"]);
-  const opacity = useTransform(scrollY, [0, 600], [1, 0]);
-
   const [section, setSection] = useState(0);
   const sectionSelected = section >= 0 && section <= 3;
 
-  useLayoutEffect(() => {
-    scrollRef.current = document.body;
-  }, []);
-
   return (
     <section className="-z-10 relative flex flex-col min-h-[calc(100vh-4rem)] mb-64 lg:mb-0">
-      <div className="-z-10 absolute inset-0 -top-16">
-        <motion.div
-          className="absolute inset-x-0 top-0 max-w-[1280px] overflow-hidden lg:bottom-auto lg:right-0 lg:left-auto lg:w-[80%]"
-          style={{ y, opacity }}
-        >
-          <div className="scale-[calc(16/9)] md:scale-100">
-            <div className="flex aspect-square items-center md:aspect-video transition-[opacity] opacity-40">
-              <iframe
-                tabIndex={-1}
-                className="w-full h-full pointer-events-none"
-                width="426"
-                height="240"
-                // src="https://www.youtube.com/embed/Khf-N2f8T78?&autoplay=1&mute=1&controls=0&showinfo=0&modestbranding=1"
-                src="https://www.youtube.com/embed/4dC_nRYIDZU?&autoplay=1&mute=1&muted=1&controls=0&showinfo=0&modestbranding=1"
-                title="YouTube video player"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                // allowfullscreen
-              ></iframe>
-            </div>
-          </div>
-          <div className="absolute -inset-[3px] bg-gradient-to-b from-transparent via-zinc-900/50 zzvia-transparent to-zinc-900"></div>
-          <div className="absolute -inset-[3px] hidden bg-gradient-to-l from-transparent via-zinc-900/50 zzvia-transparent to-zinc-900 lg:block"></div>
-        </motion.div>
-        <div className="z-10 absolute inset-0">
-          <Orb
-            delay={3}
-            className="absolute -bottom-16 left-[40%] w-[400px] h-72 rounded-full blur-3xl bg-blue-500 opacity-5 "
-          />
-          <Orb
-            delay={2}
-            className="absolute -bottom-16 left-[65%] w-52 h-52 rounded-full blur-3xl bg-yellow-500 opacity-5 "
-          />
-          <Orb
-            delay={1.5}
-            className="absolute bottom-0 -right-32w-[400px] h-52 rounded-full blur-3xl bg-green-500 opacity-5"
-          />
-        </div>
-      </div>
+      <MountedPlayback />
       <div className="pack-content flex flex-col justify-center flex-1">
         {/* 
           Using grid here instead of flex to solve two issues:
@@ -198,5 +114,87 @@ export const HeroSection = () => {
         </div>
       </div>
     </section>
+  );
+};
+
+const MountedPlayback = () => {
+  const mounted = useHasMounted();
+  if (!mounted) return <></>;
+  return <BackgroundPlayback />;
+};
+
+const BackgroundPlayback = () => {
+  const scrollRef = useRef<HTMLElement>(null!);
+  const { scrollY } = useScroll({
+    container: scrollRef,
+    layoutEffect: false,
+  });
+  const y = useTransform(scrollY, [0, 600], ["0%", "50%"]);
+  const opacity = useTransform(scrollY, [0, 600], [1, 0]);
+
+  useLayoutEffect(() => {
+    scrollRef.current = document.body;
+  }, []);
+
+  return (
+    <div className="-z-10 absolute inset-0 -top-16">
+      <motion.div
+        className="absolute inset-x-0 top-0 max-w-[1280px] overflow-hidden lg:bottom-auto lg:right-0 lg:left-auto lg:w-[80%]"
+        style={{ y, opacity }}
+      >
+        <div className="scale-[calc(16/9)] md:scale-100">
+          <div className="flex aspect-square items-center md:aspect-video transition-[opacity] opacity-40">
+            <iframe
+              tabIndex={-1}
+              className="w-full h-full pointer-events-none"
+              width="426"
+              height="240"
+              // src="https://www.youtube.com/embed/Khf-N2f8T78?&autoplay=1&mute=1&controls=0&showinfo=0&modestbranding=1"
+              src="https://www.youtube.com/embed/4dC_nRYIDZU?&autoplay=1&mute=1&muted=1&controls=0&showinfo=0&modestbranding=1"
+              title="YouTube video player"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              // allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+        <div className="absolute -inset-[3px] bg-gradient-to-b from-transparent via-zinc-900/50 zzvia-transparent to-zinc-900"></div>
+        <div className="absolute -inset-[3px] hidden bg-gradient-to-l from-transparent via-zinc-900/50 zzvia-transparent to-zinc-900 lg:block"></div>
+      </motion.div>
+      <div className="z-10 absolute inset-0">
+        <Orb
+          delay={3}
+          className="absolute -bottom-16 left-[40%] w-[400px] h-72 rounded-full blur-3xl bg-blue-500 opacity-5 "
+        />
+        <Orb
+          delay={2}
+          className="absolute -bottom-16 left-[65%] w-52 h-52 rounded-full blur-3xl bg-yellow-500 opacity-5 "
+        />
+        <Orb
+          delay={1.5}
+          className="absolute bottom-0 -right-32w-[400px] h-52 rounded-full blur-3xl bg-green-500 opacity-5"
+        />
+      </div>
+    </div>
+  );
+};
+
+const Orb = ({
+  delay = 0,
+  className,
+}: {
+  delay: number;
+  className: string;
+}) => {
+  return (
+    <motion.div
+      className={className}
+      animate={{ opacity: [0.05, 0.1] }}
+      transition={{
+        repeat: Infinity,
+        repeatType: "reverse",
+        duration: 2,
+        delay,
+      }}
+    />
   );
 };

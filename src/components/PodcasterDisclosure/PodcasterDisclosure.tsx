@@ -49,64 +49,16 @@ export const PodcasterDisclosure = () => {
           {"Conversations"}
         </span>
       </span>
-      <span className="flex flex-col text-3xl text-zinc-500 font-bold">
+      <span className="flex flex-col text-2xl text-zinc-500 font-medium">
         {
           "Conversations about the nature of intelligence, consciousness, love, and power."
         }
       </span>
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 mt-8">
         {PODCASTS.map((props) => (
           <LinkTag key={props.label} {...props} />
         ))}
-        {/* <Link
-          className="flex gap-2"
-          href="https://podcasts.apple.com/us/podcast/lex-fridman-podcast/id1434243584"
-        >
-          <span className="grid place-items-center rounded-xl bg-gradient-to-r from-purple-400 to-fuchsia-500 h-16 w-16 ">
-            <IconBrandApplePodcast size={36} />
-          </span>
-          <span className="flex flex-col justify-center">
-            <span className="text-sm text-zinc-500">Listen on</span>
-            <span className="text-2xl font-bold">Apple Podcast</span>
-          </span>
-        </Link>
-        <Link
-          className="flex gap-2"
-          href="https://open.spotify.com/show/2MAi0BvDc6GTFvKFPXnkCL"
-        >
-          <span className="grid place-items-center rounded-xl bg-gradient-to-r from-green-400 to-emerald-500 h-16 w-16 ">
-            <IconBrandSpotify size={36} />
-          </span>
-          <span className="flex flex-col justify-center">
-            <span className="text-sm text-zinc-500">Listen on</span>
-            <span className="text-2xl font-bold">Spotify</span>
-          </span>
-        </Link>
-        <Link
-          className="flex gap-2"
-          href="https://www.youtube.com/@lexfridman/featured"
-        >
-          <span className="grid place-items-center rounded-xl bg-gradient-to-r from-red-400 to-rose-500 h-16 w-16 ">
-            <IconBrandYoutube size={36} />
-          </span>
-          <span className="flex flex-col justify-center">
-            <span className="text-sm text-zinc-500">Listen on</span>
-            <span className="text-2xl font-bold">Youtube</span>
-          </span>
-        </Link>
-        <Link
-          className="flex gap-2"
-          href="https://lexfridman.com/feed/podcast/"
-        >
-          <span className="grid place-items-center rounded-xl bg-gradient-to-r from-orange-500 to-yellow-500 h-16 w-16 ">
-            <IconRss size={36} stroke={3} />
-          </span>
-          <span className="flex flex-col justify-center">
-            <span className="text-sm text-zinc-500">Subscribe via</span>
-            <span className="text-2xl font-bold">RSS Feed</span>
-          </span>
-        </Link> */}
       </div>
     </div>
   );

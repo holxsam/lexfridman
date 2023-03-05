@@ -57,52 +57,6 @@ export const Research = () => {
               )}
               key={item.title}
             >
-              {/* <div className="flex flex-row-reverse gap-4 p-4zz">
-                <figure className="flex overflow-hidden">
-                  <Image
-                    alt=""
-                    src={item.imageUrl}
-                    width={250}
-                    height={250}
-                    quality={100}
-                    className="rounded-xl border border-black/10"
-                  />
-                </figure>
-                <ul className="flex flex-col justify-center rounded-xl flex-1 pl-2 items-endzz bg-gradient-to-rzz from-neutral-100 to-white text-neutral-700 bg-neutral-100">
-         
-                  <li className="font-boldz text-sm text-red-500zz">
-                    <Link href="/" className="flex items-center gap-1">
-                      <IconFileText size={16} />
-                      Paper
-                    </Link>
-                  </li>
-                  <li className="font-boldz text-sm text-blue-500zz">
-                    <Link href="/" className="flex items-center gap-1">
-                      <IconBrandYoutube size={16} />
-                      Video
-                    </Link>
-                  </li>
-                  <li className="font-boldz text-sm text-emerald-500zz">
-                    <Link href="/" className="flex items-center gap-1">
-                      <IconExternalLink size={16} />
-                      Website
-                    </Link>
-                  </li>
-                  <li className="font-boldz text-sm text-emerald-500zz">
-                    <Link href="/" className="flex items-center gap-1">
-                      <IconSchool size={16} />
-                      Scholar
-                    </Link>
-                  </li>
-                  <li className="font-boldz text-sm text-blue-500zz">
-                    <Link href="/" className="flex items-center gap-1">
-                      <IconLetterB size={16} />
-                      Bibtex
-                    </Link>
-                  </li>
-                </ul>
-              </div> */}
-
               <figure className="flex overflow-hidden w-full h-[250px]zz">
                 <Image
                   alt=""
@@ -157,3 +111,48 @@ export const Research = () => {
     </div>
   );
 };
+
+// <div className="flex flex-row-reverse gap-4 p-4zz">
+//   <figure className="flex overflow-hidden">
+//     <Image
+//       alt=""
+//       src={item.imageUrl}
+//       width={250}
+//       height={250}
+//       quality={100}
+//       className="rounded-xl border border-black/10"
+//     />
+//   </figure>
+//   <ul className="flex flex-col justify-center rounded-xl flex-1 pl-2 items-endzz bg-gradient-to-rzz from-neutral-100 to-white text-neutral-700 bg-neutral-100">
+//     <li className="font-boldz text-sm text-red-500zz">
+//       <Link href="/" className="flex items-center gap-1">
+//         <IconFileText size={16} />
+//         Paper
+//       </Link>
+//     </li>
+//     <li className="font-boldz text-sm text-blue-500zz">
+//       <Link href="/" className="flex items-center gap-1">
+//         <IconBrandYoutube size={16} />
+//         Video
+//       </Link>
+//     </li>
+//     <li className="font-boldz text-sm text-emerald-500zz">
+//       <Link href="/" className="flex items-center gap-1">
+//         <IconExternalLink size={16} />
+//         Website
+//       </Link>
+//     </li>
+//     <li className="font-boldz text-sm text-emerald-500zz">
+//       <Link href="/" className="flex items-center gap-1">
+//         <IconSchool size={16} />
+//         Scholar
+//       </Link>
+//     </li>
+//     <li className="font-boldz text-sm text-blue-500zz">
+//       <Link href="/" className="flex items-center gap-1">
+//         <IconLetterB size={16} />
+//         Bibtex
+//       </Link>
+//     </li>
+//   </ul>
+// </div>;
