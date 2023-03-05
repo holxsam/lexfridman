@@ -1,4 +1,5 @@
 "use client";
+import { Tab } from "@headlessui/react";
 import { IconChevronRight } from "@tabler/icons-react";
 import clsx from "clsx";
 import {
@@ -10,8 +11,9 @@ import {
   useTransform,
 } from "framer-motion";
 import Image from "next/image";
-import { useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import LEXFRIDMAN from "../../../public/lexfridmancrop.png";
+import { HumanDisclosure } from "../HumanDisclosure/HumanDisclosure";
 import { PodcasterDisclosure } from "../PodcasterDisclosure/PodcasterDisclosure";
 import { ResearchItem, RESEARCH_ITEMS } from "../Research/data";
 import { ScientistDisclosure } from "../ScientistDisclosure/ScientistDisclosure";
@@ -53,9 +55,9 @@ const Orb = ({
 };
 
 const animProps: AnimationProps = {
-  initial: { x: "-100%", opacity: 0 },
-  animate: { x: 0, opacity: 1 },
-  exit: { x: "100%", opacity: 0 },
+  initial: { x: "100%", opacity: 0, filter: "blur(10px)" },
+  animate: { x: 0, opacity: 1, filter: "blur(0px)" },
+  exit: { x: "-25%", opacity: 0, filter: "blur(10px)" },
 };
 
 /**
@@ -71,30 +73,29 @@ show videos of lex black belt
  */
 
 export const HeroSection = () => {
-  const ref = useRef(document.body);
-
-  const { scrollY } = useScroll({ container: ref });
+  const scrollRef = useRef<HTMLElement>(null!);
+  const { scrollY } = useScroll({ container: scrollRef, layoutEffect: false });
   const y = useTransform(scrollY, [0, 600], ["0%", "50%"]);
   const opacity = useTransform(scrollY, [0, 600], [1, 0]);
 
-  const [section, setSection] = useState(-1);
+  const [section, setSection] = useState(0);
   const sectionSelected = section >= 0 && section <= 3;
 
+  useLayoutEffect(() => {
+    scrollRef.current = document.body;
+  }, []);
+
   return (
-    <section className="-z-10 relative flex flex-col justify-center h-min min-h-[calc(100vh-4rem)]">
+    <section className="-z-10 relative flex flex-col min-h-[calc(100vh-4rem)] mb-64 lg:mb-0">
       <div className="-z-10 absolute inset-0 -top-16">
         <motion.div
           className="absolute inset-x-0 top-0 max-w-[1280px] overflow-hidden lg:bottom-auto lg:right-0 lg:left-auto lg:w-[80%]"
           style={{ y, opacity }}
         >
           <div className="scale-[calc(16/9)] md:scale-100">
-            <div
-              className={clsx(
-                "flex aspect-square items-center md:aspect-video transition-[opacity] duration-500",
-                sectionSelected ? "opacity-20" : "opacity-40"
-              )}
-            >
+            <div className="flex aspect-square items-center md:aspect-video transition-[opacity] opacity-40">
               <iframe
+                tabIndex={-1}
                 className="w-full h-full pointer-events-none"
                 width="426"
                 height="240"
@@ -109,88 +110,91 @@ export const HeroSection = () => {
           <div className="absolute -inset-[3px] bg-gradient-to-b from-transparent via-zinc-900/50 zzvia-transparent to-zinc-900"></div>
           <div className="absolute -inset-[3px] hidden bg-gradient-to-l from-transparent via-zinc-900/50 zzvia-transparent to-zinc-900 lg:block"></div>
         </motion.div>
-
         <div className="z-10 absolute inset-0">
           <Orb
             delay={3}
-            className="-z-10 w-[400px] h-72 rounded-full blur-3xl bg-blue-500 bg-gradient-to-rzz from-blue-500 to-yellow-500 opacity-5 absolute  -bottom-16 left-[40%]"
+            className="absolute -bottom-16 left-[40%] w-[400px] h-72 rounded-full blur-3xl bg-blue-500 opacity-5 "
           />
           <Orb
             delay={2}
-            className="-z-10 w-52 h-52 rounded-full blur-3xl bg-yellow-500 bg-gradient-to-rzz from-blue-500 to-yellow-500 opacity-5 absolute  -bottom-16 left-[65%]"
+            className="absolute -bottom-16 left-[65%] w-52 h-52 rounded-full blur-3xl bg-yellow-500 opacity-5 "
           />
           <Orb
             delay={1.5}
-            className="-z-10 w-[400px] h-52 rounded-full blur-3xl bg-green-500 bg-gradient-to-rzz from-blue-500 to-green-500 opacity-5 absolute bottom-0 -right-32"
+            className="absolute bottom-0 -right-32w-[400px] h-52 rounded-full blur-3xl bg-green-500 opacity-5"
           />
         </div>
       </div>
-      <div className="pack-content flex items-center h-full w-full">
-        <div className="relative flex flex-col lg:flex-row gap-8 lg:gap-32 justify-center h-min w-full">
-          <div className="z-10 relative flex flex-col">
-            <Orb
-              delay={0}
-              className="-z-10 w-60 h-60 rounded-full blur-3xl bg-yellow-500 opacity-10 absolute top-[-10%] left-[-10%]"
-            />
-            <Orb
-              delay={1}
-              className="-z-10 w-96 h-72 rounded-full blur-3xl bg-pink-500 opacity-5 absolute top-[50%] left-[10%]"
-            />
-            {sections.map((sec, i) => (
-              <button
-                key={sec.id}
-                className={clsx(
-                  "flex gap-2 outline-none appearance-none",
-                  trackerClass
-                )}
-                onFocus={(e) => setSection(i)}
-                onBlur={(e) => {
-                  if (!e.relatedTarget?.classList.contains(trackerClass)) {
-                  }
-                  // setSection(-1);
-                }}
-              >
-                {section === i && (
-                  <motion.span
-                    initial={{ x: 50, scale: 0.6 }}
-                    animate={{ x: 0, scale: 0.6, opacity: 1 }}
-                    exit={sectionSelected ? { x: -50 } : undefined}
-                    layoutId="hero-dot"
-                    className="h-full aspect-square bg-zinc-50 rounded-full"
-                  ></motion.span>
-                )}
-                <motion.span
-                  layout
-                  className={clsx(
-                    "font-extrabold uppercase text-[clamp(40px,10vw,72px)] [line-height:1] transition-[color] duration-500",
-                    section === i
-                      ? "text-zinc-50"
-                      : section === -1
-                      ? "text-zinc-50"
-                      : "text-zinc-700/80"
+      <div className="pack-content flex flex-col justify-center flex-1">
+        {/* 
+          Using grid here instead of flex to solve two issues:
+            1. On mobile, the two main containers are stacked on top of each other. 
+               For some reason this causes h-full to not work on dot, there on mobile the dot disappears.
+               This only happens if we use flex-col. So we switch to grid and manage the rows/cols with grid.
+            2. When the dot pushes "podcaster" to the right, the flex container would grow to accomodate for the new width.
+               This causes a small but very noticeable jank when animating between panels. Using grid also solves this issue.
+        */}
+        <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-32">
+          <Tab.Group vertical selectedIndex={section} onChange={setSection}>
+            <Tab.List className="z-10 relative flex flex-col">
+              <Orb
+                delay={0}
+                className="-z-10 absolute top-[-10%] left-[-10%] w-60 h-60 rounded-full blur-3xl bg-yellow-500 opacity-10"
+              />
+              <Orb
+                delay={1}
+                className="-z-10 absolute top-[50%] left-[10%] w-96 h-72 rounded-full blur-3xl bg-pink-500 opacity-5"
+              />
+              {sections.map((sec, i) => (
+                <Tab key={sec.id} className="flex outline-none appearance-none">
+                  {section === i && (
+                    <motion.span
+                      initial={{ scale: 0.6 }}
+                      animate={{ scale: 0.6 }}
+                      layoutId="hero-dot"
+                      className="h-full aspect-square bg-zinc-50 rounded-full"
+                    />
                   )}
+                  <motion.span
+                    layout
+                    className={clsx(
+                      "font-extrabold w-min uppercase text-[clamp(40px,10vw,72px)] [line-height:1] transition-[color] duration-500",
+                      section === i
+                        ? "text-zinc-50"
+                        : section === -1
+                        ? "text-zinc-50"
+                        : "text-zinc-700/80"
+                    )}
+                  >
+                    {sec.label}
+                  </motion.span>
+                </Tab>
+              ))}
+            </Tab.List>
+            <Tab.Panels className="z-0 relative flex flex-col">
+              <AnimatePresence>
+                <motion.div
+                  key={section}
+                  {...animProps}
+                  transition={{ ease: "easeInOut", duration: 0.3 }}
+                  className="absolute flex w-full h-full"
                 >
-                  {sec.label}
-                </motion.span>
-              </button>
-            ))}
-          </div>
-          <div className="z-0 relative flex flex-col w-full min-h-[500px]">
-            <AnimatePresence>
-              <motion.div
-                key={section}
-                {...animProps}
-                className="absolute flex w-full h-full"
-              >
-                {section === 0 && <ScientistDisclosure />}
-                {section === 1 && <TeacherDisclosure />}
-                {section === 2 && <PodcasterDisclosure />}
-                {section === 3 && (
-                  <div className=" w-full bg-yellow-500 rounded-3xl">four</div>
-                )}
-              </motion.div>
-            </AnimatePresence>
-          </div>
+                  <Tab.Panel static tabIndex={-1}>
+                    {section === 0 && <ScientistDisclosure />}
+                  </Tab.Panel>
+                  <Tab.Panel static tabIndex={-1}>
+                    {section === 1 && <TeacherDisclosure />}
+                  </Tab.Panel>
+                  <Tab.Panel static tabIndex={-1}>
+                    {section === 2 && <PodcasterDisclosure />}
+                  </Tab.Panel>
+                  <Tab.Panel static tabIndex={-1}>
+                    {section === 3 && <HumanDisclosure />}
+                  </Tab.Panel>
+                </motion.div>
+              </AnimatePresence>
+            </Tab.Panels>
+          </Tab.Group>
         </div>
       </div>
     </section>
