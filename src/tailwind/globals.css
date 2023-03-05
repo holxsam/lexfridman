@@ -35,5 +35,5 @@ html {
 body {
   /* layout defaults: */
   @apply flex flex-col flex-1 overflow-x-hidden overflow-y-scroll;
-  @apply relative isolate;
+  @apply relative isolate scroll-smooth;
 }
