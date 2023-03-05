@@ -1,7 +1,7 @@
 "use client";
 
 import clsx from "clsx";
-import { Menu, Popover } from "@headlessui/react";
+import { Popover } from "@headlessui/react";
 import { IconMenu, IconX } from "@tabler/icons-react";
 
 export const NavMenuButton = () => {
@@ -9,9 +9,9 @@ export const NavMenuButton = () => {
     <Popover.Button
       className={clsx(
         "outline-none appearance-none",
-        "focus-visible:ring-1 focus-visible:ring-neutral-900",
+        "focus-visible:ring-1 focus-visible:ring-white",
         "rounded-xl w-10 aspect-square grid place-items-center sm:hidden hover:text-primary-500 ring-current",
-        "hover:bg-primary-900/50 hover:text-primary-100"
+        "hover:bg-zinc-800 hover:text-white"
       )}
     >
       {({ open }) => (open ? <IconX /> : <IconMenu />)}

@@ -3,7 +3,6 @@ import {
   IconBrandApplePodcast,
   IconBrandSpotify,
   IconRss,
-  IconBrandPatreon,
   IconBrandYoutube,
 } from "@tabler/icons-react";
 import clsx from "clsx";
@@ -20,21 +19,21 @@ export const PodcasterDisclosure = () => {
           {"Conversations"}
         </span>
       </span>
-      <span className="flex flex-col text-xl text-zinc-500 font-medium">
+      <span className="flex flex-col text-xl text-zinc-500 font-semibold">
         {
           "Conversations about the nature of intelligence, consciousness, love, and power."
         }
       </span>
-      <span className="flex flex-col text-base text-zinc-500">
-        <span className="font-bold text-zinc-100">{"Featuring:"}</span>
-        <span className="">
+      <span className="flex flex-col text-zinc-500">
+        <span className="text-xl font-bold text-zinc-100">{"Featuring"}</span>
+        <span className="text-sm">
           {SAMPLE_GUESTS.map((guest) => (
             <Fragment key={guest.name}>
               <Link
                 target="_blank"
                 key={guest.name}
                 href={guest.videoUrl}
-                className="inline text-base hover:underline focus-visible:underline"
+                className="hover:underline focus-visible:underline hover:text-white focus-visible:text-white"
               >
                 {guest.name}
               </Link>

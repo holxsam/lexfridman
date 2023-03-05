@@ -1,28 +1,13 @@
+import { SocialMedia } from "@/components/SocialMedia/SocialMedia";
 import { HeroSection } from "@/components/HeroSection/HeroSection";
 import { Research } from "@/components/Research/Research";
-import Image from "next/image";
-
-import LEXFRIDMAN from "../../public/lexfridmancrop.png";
-
-// Lex Fridman
-// -Scientist
-// -Teacher
-// -Podcaster
-// -Human
 
 export default function Home() {
   return (
-    <div className="isolate flex flex-col gap-8">
+    <div className="isolate flex flex-col gap-16 pb-16">
       <HeroSection />
-
+      <SocialMedia />
       <Research />
-      {/* <Research /> */}
-
-      <div className="overflow-x-hidden">
-        <div className="flex flex-col gap-4 pack-content ">
-          <Lorem />
-        </div>
-      </div>
     </div>
   );
 }

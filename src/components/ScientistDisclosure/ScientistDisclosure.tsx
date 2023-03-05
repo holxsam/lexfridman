@@ -8,7 +8,7 @@ import { ResearchItem, RESEARCH_ITEMS } from "../Research/data";
 const slideAroundTransition: Transition = {
   repeat: Infinity,
   repeatType: "reverse",
-  duration: 30,
+  duration: 20,
   ease: "linear",
 };
 
@@ -42,7 +42,7 @@ export const ScientistDisclosure = () => {
         <div className="flex flex-col gap-4">
           <motion.div
             className="flex gap-4"
-            animate={{ x: ["0%", "-25%"] }}
+            animate={{ x: ["0%", "-10%"] }}
             transition={slideAroundTransition}
           >
             {RESEARCH_ITEMS.slice(0, 5).map((item) => (
@@ -51,7 +51,7 @@ export const ScientistDisclosure = () => {
           </motion.div>
           <motion.div
             className="flex gap-4"
-            animate={{ x: ["-25%", "25%"] }}
+            animate={{ x: ["-25%", "10%"] }}
             transition={slideAroundTransition}
           >
             {RESEARCH_ITEMS.slice(5).map((item) => (
@@ -83,9 +83,8 @@ const SlideImage = ({ item }: { item: ResearchItem }) => {
           height: 140,
         }}
         onClick={() => {
-          document
-            .getElementById("research")
-            ?.scrollIntoView({ behavior: "smooth" });
+          const id = item.title;
+          document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
         }}
       />
     </figure>

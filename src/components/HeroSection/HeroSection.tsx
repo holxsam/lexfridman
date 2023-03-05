@@ -144,7 +144,7 @@ const BackgroundPlayback = () => {
       >
         <div className="scale-[calc(16/9)] md:scale-100">
           <div className="flex aspect-square items-center md:aspect-video transition-[opacity] opacity-40">
-            <iframe
+            {/* <iframe
               tabIndex={-1}
               className="w-full h-full pointer-events-none"
               width="426"
@@ -154,7 +154,7 @@ const BackgroundPlayback = () => {
               title="YouTube video player"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               // allowfullscreen
-            ></iframe>
+            ></iframe> */}
           </div>
         </div>
         <div className="absolute -inset-[3px] bg-gradient-to-b from-transparent via-zinc-900/50 zzvia-transparent to-zinc-900"></div>

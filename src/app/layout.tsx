@@ -1,6 +1,7 @@
 import "../tailwind/globals.css";
 import { Inter, Fira_Code } from "next/font/google";
 import { NavBar } from "@/components/NavBar/NavBar";
+import { Footer } from "@/components/Footer/Footer";
 // import { NavBar } from "@/components/NavBar/NavBar";
 
 export const metadata = {
@@ -34,7 +35,9 @@ export default function RootLayout({
           <NavBar />
         </header>
         <main className="-z-10 isolate flex-1">{children}</main>
-        <footer className="-z-20 isolate ">{/* <Footer /> */}</footer>
+        <footer className="-z-20 isolate ">
+          <Footer />{" "}
+        </footer>
       </body>
     </html>
   );

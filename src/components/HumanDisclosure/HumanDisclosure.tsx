@@ -1,6 +1,6 @@
 "use client";
 
-import { IconBrandYoutube, IconPlayerPlay } from "@tabler/icons-react";
+import { IconBrandYoutube } from "@tabler/icons-react";
 import clsx from "clsx";
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
