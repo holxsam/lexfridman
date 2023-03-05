@@ -15,7 +15,7 @@ export const TeacherDisclosure = () => {
       </span>
       <span className="flex flex-col text-3xl ">
         <span className="font-bold">{"Deep Learning"}</span>
-        <span className="text-xl italic text-zinc-400 font-light">
+        <span className="text-xl italic text-zinc-400 font-medium">
           {"16 video lectures from 2017-2020"}
         </span>
         <span className="text-base text-zinc-600">
@@ -26,7 +26,7 @@ export const TeacherDisclosure = () => {
       </span>
       <span className="flex flex-col text-3xl ">
         <span className="font-bold">{"Self-Driving Cars"}</span>
-        <span className="text-xl italic text-zinc-400 font-light">
+        <span className="text-xl italic text-zinc-400 font-medium">
           {"10 video lectures from 2019"}
         </span>
         <span className="text-base text-zinc-600">

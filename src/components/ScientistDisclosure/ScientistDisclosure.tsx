@@ -19,11 +19,11 @@ export const ScientistDisclosure = () => {
         <span className="text-[clamp(40px,5vw,60px)] [line-height:1] font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-500 via-blue-500 to-purple-500 animate-gradient-x">
           {"Lex Fridman"}
         </span>
-        <span className="font-extralight text-xl text-zinc-500">
+        <span className="font-medium text-xl text-zinc-500">
           {"Pronounced /freed·man/"}
         </span>
       </span>
-      <span className="whitespace-nowrap text-zinc-200 pt-2">
+      <span className="whitespace-nowrap text-zinc-200 pt-4">
         {"MIT Research Scientist"}
         <span className="italic font-bold text-zinc-500">
           {" (2015 - current)"}

@@ -39,7 +39,7 @@ export const HeroSection = () => {
   const sectionSelected = section >= 0 && section <= 3;
 
   return (
-    <section className="-z-10 relative flex flex-col min-h-[calc(100vh-4rem)] mb-64 lg:mb-0">
+    <section className="-z-10 relative flex flex-col min-h-[calc(100vh-4rem)] mb-96 sm:mb-64 md:mb-40 lg:mb-0">
       <MountedPlayback />
       <div className="pack-content flex flex-col justify-center flex-1">
         {/* 

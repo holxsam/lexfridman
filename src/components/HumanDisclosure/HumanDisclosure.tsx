@@ -1,5 +1,25 @@
 "use client";
 
+import { IconBrandYoutube, IconPlayerPlay } from "@tabler/icons-react";
+import clsx from "clsx";
+import Image, { StaticImageData } from "next/image";
+import Link from "next/link";
+import BLACK_BELT from "../../../public/lex-blackbelt.gif";
+import GUITAR from "../../../public/lex-guitar.gif";
+
+const PREVIEWS: GifPreviewProps[] = [
+  {
+    image: GUITAR,
+    alt: "lex playing the song sldkfj sldkj",
+    link: "https://www.youtube.com/watch?v=Khf-N2f8T78",
+  },
+  {
+    image: BLACK_BELT,
+    alt: "lex giving a speech about his blackbelt",
+    link: "https://www.youtube.com/watch?v=bCA54RIkpTo",
+  },
+];
+
 export const HumanDisclosure = () => {
   return (
     <div className="relative flex flex-col gap-6 h-full w-full">
@@ -10,21 +30,59 @@ export const HumanDisclosure = () => {
       </span>
       <span className="flex flex-col text-2xl text-zinc-500 font-medium">
         {
-          "In my free time I enjoy playing the guitar and practicing jiu jitsu and judo."
+          "In my free time, I enjoy playing the guitar and piano and practicing jiu jitsu and judo."
         }
       </span>
 
-      <div className="rounded-3xl overflow-hidden">
-        {/* <iframe
-          width="560"
-          height="315"
-          src="https://www.youtube.com/embed/bCA54RIkpTo?&mute=1&muted=1&controls=1&showinfo=0&modestbranding=1&loop=1"
-          title="YouTube video player"
-          // frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          // allowfullscreen
-        ></iframe> */}
+      <div className="flex flex-col sm:flex-row gap-4">
+        {PREVIEWS.map((gif) => (
+          <GifPreview key={gif.alt} {...gif} />
+        ))}
       </div>
     </div>
+  );
+};
+
+type GifPreviewProps = {
+  image: StaticImageData;
+  alt?: string;
+  link: string;
+};
+
+const GifPreview = ({ image, alt = "", link }: GifPreviewProps) => {
+  return (
+    <Link
+      className="overflow-hidden rounded-3xl group/gif relative max-w-xs"
+      target="_blank"
+      href={link}
+    >
+      <Image
+        alt={alt}
+        src={image}
+        quality={100}
+        className={clsx(
+          "flex object-contain w-full h-full",
+          "transition-[filter,transform] duration-300 ease-linear scale-100 group-hover/gif:scale-150 group-focus/gif:scale-150"
+        )}
+      />
+      <div
+        className={clsx(
+          "absolute inset-0",
+          "transition-[background-color] duration-200 ease-linear bg-zinc-900/0 group-hover/gif:bg-zinc-900/90 group-focus/gif:bg-zinc-900/90"
+        )}
+      ></div>
+      <div
+        className={clsx(
+          "absolute inset-0 grid place-items-center",
+          "transition-[transform] duration-200 ease-linear translate-y-full group-hover/gif:translate-y-0 group-focus/gif:translate-y-0"
+        )}
+      >
+        <div className="grid place-items-center w-1/2 h-1/2">
+          <IconBrandYoutube size={48} className="text-red-500" />
+          {/* <IconPlayerPlay size={48} className="text-red-500" /> */}
+        </div>
+        <div className="absolute bottom-2 text-sm">Watch on Youtube</div>
+      </div>
+    </Link>
   );
 };
