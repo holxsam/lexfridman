@@ -18,7 +18,7 @@ export const TeacherDisclosure = () => {
         <span className="text-xl italic text-zinc-400 font-medium">
           {"16 video lectures from 2017-2020"}
         </span>
-        <span className="text-base text-zinc-600">
+        <span className="text-base text-zinc-500">
           {
             "Featuring Lex Fridman, Andrew Trask, Vivienne Sze, and Vladimir Vapnik."
           }
@@ -29,7 +29,7 @@ export const TeacherDisclosure = () => {
         <span className="text-xl italic text-zinc-400 font-medium">
           {"10 video lectures from 2019"}
         </span>
-        <span className="text-base text-zinc-600">
+        <span className="text-base text-zinc-500">
           {
             "Featuring Lex Fridman, Drago Anguelov, Oliver Cameron, Karl Iagnemma, Sacha Arnoud, Emilio Frazzoli, Sterling Anderson, Chris Gerdes, and Sertac Karaman."
           }

@@ -19,13 +19,13 @@ export const PodcasterDisclosure = () => {
           {"Conversations"}
         </span>
       </span>
-      <span className="flex flex-col text-xl text-zinc-500 font-semibold">
+      <span className="flex flex-col text-xl text-zinc-50 font-semibold">
         {
           "Conversations about the nature of intelligence, consciousness, love, and power."
         }
       </span>
       <span className="flex flex-col text-zinc-500">
-        <span className="text-xl font-bold text-zinc-100">{"Featuring"}</span>
+        <span className="text-lg font-bold text-zinc-300">{"Featuring"}</span>
         <span className="text-sm">
           {SAMPLE_GUESTS.map((guest) => (
             <Fragment key={guest.name}>
@@ -85,7 +85,7 @@ const LinkTag = ({
     <Link className="flex gap-2" href={link}>
       <span
         className={clsx(
-          "grid place-items-center rounded-xl h-16 w-16",
+          "grid place-items-center rounded-xl min-w-[64px] aspect-square",
           twGradient
         )}
       >
@@ -93,7 +93,7 @@ const LinkTag = ({
       </span>
       <span className="flex flex-col justify-center">
         <span className="text-sm font-medium text-zinc-500">{actionLabel}</span>
-        <span className="text-2xl font-bold">{label}</span>
+        <span className="text-2xl font-bold whitespace-nowrap">{label}</span>
       </span>
     </Link>
   );
@@ -101,18 +101,18 @@ const LinkTag = ({
 
 const PODCASTS: LinkTagProp[] = [
   {
-    link: "https://podcasts.apple.com/us/podcast/lex-fridman-podcast/id1434243584",
-    icon: <IconBrandApplePodcast size={36} />,
-    actionLabel: "Listen on",
-    label: "Apple Podcast",
-    twGradient: "bg-gradient-to-r from-purple-400 to-fuchsia-500",
-  },
-  {
     link: "https://open.spotify.com/show/2MAi0BvDc6GTFvKFPXnkCL",
     icon: <IconBrandSpotify size={36} />,
     actionLabel: "Listen on",
     label: "Spotify",
     twGradient: "bg-gradient-to-r from-green-400 to-emerald-500",
+  },
+  {
+    link: "https://podcasts.apple.com/us/podcast/lex-fridman-podcast/id1434243584",
+    icon: <IconBrandApplePodcast size={36} />,
+    actionLabel: "Listen on",
+    label: "Apple Podcast",
+    twGradient: "bg-gradient-to-r from-purple-400 to-fuchsia-500",
   },
   {
     link: "https://www.youtube.com/@lexfridman/featured",

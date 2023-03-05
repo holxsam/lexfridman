@@ -14,7 +14,7 @@ const slideAroundTransition: Transition = {
 
 export const ScientistDisclosure = () => {
   return (
-    <div className="relative flex flex-col h-min w-full rounded-3xl">
+    <div className="relative flex flex-col h-full w-full rounded-3xl">
       <span className="flex flex-col">
         <span className="text-[clamp(40px,5vw,60px)] [line-height:1] font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-500 via-blue-500 to-purple-500 animate-gradient-x">
           {"Lex Fridman"}
@@ -38,8 +38,8 @@ export const ScientistDisclosure = () => {
           {"Human-robot interaction and machine learning."}
         </span>
       </span>
-      <div className="relative w-fullzz pt-8">
-        <div className="flex flex-col gap-4">
+      <div className="relative w-full pt-8">
+        <div className="absolute flex flex-col gap-4">
           <motion.div
             className="flex gap-4"
             animate={{ x: ["0%", "-10%"] }}

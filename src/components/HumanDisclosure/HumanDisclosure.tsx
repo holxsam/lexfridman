@@ -1,6 +1,10 @@
 "use client";
 
-import { IconBrandYoutube } from "@tabler/icons-react";
+import {
+  IconBrandYoutube,
+  IconPlayerPlay,
+  IconPlayerPlayFilled,
+} from "@tabler/icons-react";
 import clsx from "clsx";
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
@@ -28,7 +32,7 @@ export const HumanDisclosure = () => {
           {"Enjoyment"}
         </span>
       </span>
-      <span className="flex flex-col text-2xl text-zinc-500 font-medium">
+      <span className="flex flex-col text-xl text-zinc-50 font-medium">
         {
           "In my free time, I enjoy playing the guitar and piano and practicing jiu jitsu and judo."
         }
@@ -52,7 +56,7 @@ type GifPreviewProps = {
 const GifPreview = ({ image, alt = "", link }: GifPreviewProps) => {
   return (
     <Link
-      className="overflow-hidden rounded-3xl group/gif relative max-w-xs"
+      className="overflow-hidden rounded-2xl group/gif relative max-w-xs"
       target="_blank"
       href={link}
     >
@@ -78,8 +82,7 @@ const GifPreview = ({ image, alt = "", link }: GifPreviewProps) => {
         )}
       >
         <div className="grid place-items-center w-1/2 h-1/2">
-          <IconBrandYoutube size={48} className="text-red-500" />
-          {/* <IconPlayerPlay size={48} className="text-red-500" /> */}
+          <IconPlayerPlayFilled size={48} />
         </div>
         <div className="absolute bottom-2 text-sm">Watch on Youtube</div>
       </div>

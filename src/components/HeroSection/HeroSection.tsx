@@ -47,10 +47,10 @@ export const HeroSection = () => {
   const mounted = useHasMounted();
 
   useEffect(() => {
-    let timeout: NodeJS.Timeout = setTimeout(() => {}, 0);
+    let timeout: NodeJS.Timeout;
 
     if (!pauseSlider) {
-      clearTimeout(timeout);
+      // clearTimeout(timeout);
       timeout = setTimeout(() => {
         setSection((v) => (v + 1) % sections.length);
       }, DURATION);
@@ -64,34 +64,7 @@ export const HeroSection = () => {
   return (
     <section className="-z-10 relative flex flex-col min-h-[calc(100vh-4rem)] mb-96 sm:mb-64 md:mb-40 lg:mb-0">
       <MountedPlayback />
-      <div className="pack-content flex flex-col justify-center flex-1">
-        <div className="flex flex-col pb-16">
-          <button
-            type="button"
-            onClick={() => setPauseSlider((v) => !v)}
-            className="w-full flex flex-col text-zinc-500 hover:text-zinc-300 focus-visible:text-zinc-300"
-          >
-            <span className="flex gap-1 items-center ml-1 font-extralight text-sm uppercase">
-              <span className="">
-                {pauseSlider ? (
-                  <IconPlayerPlayFilled size={16} />
-                ) : (
-                  <IconPlayerStopFilled size={16} />
-                )}
-              </span>
-              <span className="">
-                {pauseSlider
-                  ? "stopped · click to autoplay"
-                  : "autoplaying · click to stop"}
-              </span>
-            </span>
-            <TimerLine
-              section={section}
-              duration={DURATION}
-              paused={pauseSlider}
-            />
-          </button>
-        </div>
+      <div className="pack-content flex flex-col justify-centerzz flex-1 pt-40">
         {/* 
           Using grid here instead of flex to solve two issues:
             1. On mobile, the two main containers are stacked on top of each other. 
@@ -139,6 +112,34 @@ export const HeroSection = () => {
                   </motion.span>
                 </Tab>
               ))}
+              <div className="flex flex-col pt-4">
+                <button
+                  type="button"
+                  onClick={() => setPauseSlider((v) => !v)}
+                  className="w-full flex flex-col gap-1 text-zinc-500 hover:text-zinc-300 focus-visible:text-zinc-300"
+                >
+                  <TimerLine
+                    section={section}
+                    duration={DURATION}
+                    paused={pauseSlider}
+                  />
+                  <span className="flex gap-1 items-center px-1 font-extralight text-sm uppercase w-full">
+                    <span className="">
+                      {pauseSlider ? "stopped" : "autoplaying"}
+                    </span>
+                    <span className="ml-auto">
+                      {pauseSlider ? "click to autoplay" : "click to stop"}
+                    </span>
+                    <span className="">
+                      {pauseSlider ? (
+                        <IconPlayerPlayFilled size={16} />
+                      ) : (
+                        <IconPlayerStopFilled size={16} />
+                      )}
+                    </span>
+                  </span>
+                </button>
+              </div>
             </Tab.List>
             <Tab.Panels className="z-0 relative flex flex-col">
               <AnimatePresence>
@@ -280,8 +281,8 @@ const TimerLine = ({
   }, [section, duration, paused]);
 
   return (
-    <div className="w-full h-px bg-white/5">
-      <motion.div className="h-full bg-zinc-700/80" animate={controls} />
+    <div className="w-full h-[2px] bg-white/5">
+      <motion.div className="h-full bg-zinc-500/80" animate={controls} />
     </div>
   );
 };
