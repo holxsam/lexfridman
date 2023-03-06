@@ -19,22 +19,22 @@ export const ScientistDisclosure = () => {
         <span className="text-[clamp(40px,5vw,60px)] [line-height:1] font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-500 via-blue-500 to-purple-500 animate-gradient-x">
           {"Lex Fridman"}
         </span>
-        <span className="font-medium text-xl text-zinc-500">
+        <span className="font-bold text-xl text-zinc-500">
           {"Pronounced /freed·man/"}
         </span>
       </span>
-      <span className="whitespace-nowrap text-zinc-200 pt-4">
+      <span className="whitespace-nowrap text-zinc-50 font-bold pt-4">
         {"MIT Research Scientist"}
-        <span className="italic font-bold text-zinc-500">
+        <span className="italic font-light text-zinc-500">
           {" (2015 - current)"}
         </span>
       </span>
-      <span className="">
+      <span className="text-zinc-50 font-bold">
         {"Laboratory for Information and Decision Systems (LIDS)"}
       </span>
       <span className="">
         <span className="font-bold text-zinc-500">{"Research: "}</span>
-        <span className="">
+        <span className="text-zinc-50 font-bold">
           {"Human-robot interaction and machine learning."}
         </span>
       </span>

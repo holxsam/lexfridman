@@ -2,7 +2,6 @@ import "../tailwind/globals.css";
 import { Inter, Fira_Code } from "next/font/google";
 import { NavBar } from "@/components/NavBar/NavBar";
 import { Footer } from "@/components/Footer/Footer";
-// import { NavBar } from "@/components/NavBar/NavBar";
 
 export const metadata = {
   viewport: {
@@ -12,7 +11,7 @@ export const metadata = {
     minimumScale: 1,
   },
   title: "Lex Fridman",
-  description: "All things Lex Fridman",
+  description: "A demo of redesign of Lex Fridman's website.",
 };
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });

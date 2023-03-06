@@ -1,11 +1,11 @@
 "use client";
 
 import clsx from "clsx";
-import { motion, Variants } from "framer-motion";
 import Link from "next/link";
+import { motion, Variants } from "framer-motion";
 import { SOCIAL_MEDIA } from "./data";
 
-const cardVariants: Variants = {
+const linkTagVariants: Variants = {
   offscreen: {
     y: 200,
     opacity: 0,
@@ -52,7 +52,7 @@ export const SocialMedia = () => {
                   target="_blank"
                   custom={i}
                   key={item.label}
-                  variants={cardVariants}
+                  variants={linkTagVariants}
                   whileHover={{ scale: 1.1 }}
                   whileFocus={{ scale: 1.1 }}
                   className={clsx(
