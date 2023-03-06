@@ -3,7 +3,15 @@ import Image from "next/image";
 import { RESEARCH_ITEMS } from "./data";
 import Link from "next/link";
 import clsx from "clsx";
-import { IconBrandYoutube, IconFileText } from "@tabler/icons-react";
+import {
+  IconBrandYoutube,
+  IconCheck,
+  IconCopy,
+  IconFileText,
+} from "@tabler/icons-react";
+import { useState } from "react";
+import { Modal } from "../Modal/Modal";
+import { motion } from "framer-motion";
 
 export const Research = () => {
   return (
@@ -38,7 +46,7 @@ export const Research = () => {
                   quality={100}
                   className={clsx(
                     "flex object-contain w-full h-full transition-[transform] duration-200 ease-linear",
-                    "scale-100 group-hover/img-link:scale-150 group-focus-within/img-link:scale-150"
+                    "scale-100 group-hover/img-link:scale-125 group-focus-within/img-link:scale-125"
                   )}
                 />
                 <div
@@ -49,63 +57,34 @@ export const Research = () => {
                   )}
                 >
                   {item.videoUrl ? (
-                    <IconBrandYoutube size={20} />
+                    <IconBrandYoutube size={24} />
                   ) : (
-                    <IconFileText size={20} />
+                    <IconFileText size={24} />
                   )}
                   {item.videoUrl ? "Link to video" : "Link to paper"}
                 </div>
               </Link>
               <ul className="flex items-center gap-4">
                 {item.paperUrl && (
-                  <li className="">
-                    <Link
-                      target="_blank"
-                      href={item.paperUrl}
-                      className="font-medium text-sm hover:underline focus-visible:underline text-zinc-500 hover:text-zinc-50 focus-visible:text-zinc-50"
-                    >
-                      {"Paper"}
-                    </Link>
+                  <li>
+                    <StyledLink href={item.paperUrl} label="Paper" />
                   </li>
                 )}
                 {item.videoUrl && (
-                  <li className="">
-                    <Link
-                      target="_blank"
-                      href={item.videoUrl}
-                      className="font-medium text-sm hover:underline focus-visible:underline text-zinc-500 hover:text-zinc-50 focus-visible:text-zinc-50"
-                    >
-                      {"Video"}
-                    </Link>
+                  <li>
+                    <StyledLink href={item.videoUrl} label="Video" />
                   </li>
                 )}
                 {item.websiteUrl && (
-                  <li className="">
-                    <Link
-                      target="_blank"
-                      href={item.websiteUrl}
-                      className="font-medium text-sm hover:underline focus-visible:underline text-zinc-500 hover:text-zinc-50 focus-visible:text-zinc-50"
-                    >
-                      {"Website"}
-                    </Link>
+                  <li>
+                    <StyledLink href={item.websiteUrl} label="Website" />
                   </li>
                 )}
                 <li className="ml-auto">
-                  <Link
-                    target="_blank"
-                    href={item.googleScholarUrl}
-                    className="font-medium text-sm hover:underline focus-visible:underline text-zinc-500 hover:text-zinc-50 focus-visible:text-zinc-50"
-                  >
-                    {"Scholar"}
-                  </Link>
+                  <StyledLink href={item.googleScholarUrl} label="Scholar" />
                 </li>
-                <li className="font-bold text-sm">
-                  <button
-                    type="button"
-                    className="rounded-full h-8 px-3 bg-blue-700/30 text-blue-500 hover:bg-blue-500/30 focus-visible:bg-blue-500/30"
-                  >
-                    {"BibTex"}
-                  </button>
+                <li>
+                  <BibTex text={item.cite} />
                 </li>
               </ul>
               <div className="flex flex-col gap-3">
@@ -122,3 +101,78 @@ export const Research = () => {
     </div>
   );
 };
+
+type BibTexProps = {
+  text: string;
+};
+
+const BibTex = ({ text }: BibTexProps) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleModal = () => setIsOpen((v) => !v);
+
+  return (
+    <>
+      <button
+        type="button"
+        className="rounded-full h-8 px-3 bg-blue-700/30 text-blue-500 hover:bg-blue-500/30 focus-visible:bg-blue-500/30 font-bold text-sm"
+        onClick={toggleModal}
+      >
+        {"BibTex"}
+      </button>
+      <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
+        <div className="flex flex-col gap-4 rounded-2xl p-8 bg-zinc-900/90 backdrop-blur w-full min-w-[320px] shadow border border-white/5">
+          <p className="w-full text-sm text-zinc-500 font-medium">{text}</p>
+          <CopyToClipboardButton text={text} />
+        </div>
+      </Modal>
+    </>
+  );
+};
+
+const CopyToClipboardButton = ({ text }: BibTexProps) => {
+  const [copied, setCopied] = useState(false);
+  const copyText = () => {
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+  };
+  return (
+    <motion.button
+      whileTap={{ scale: 0.85 }}
+      className="flex justify-center items-center gap-2 rounded-full h-12 px-3 uppercase font-bold bg-blue-900/50 text-blue-500 hover:bg-blue-700/50 focus-visible:bg-blue-700/50 appearance-none outline-none focus-visible:ring-1 focus-visible:ring-white"
+      onClick={copyText}
+    >
+      <span className="relative w-6 h-6">
+        {copied && (
+          <motion.span
+            initial={{ x: -100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            className="absolute inset-0"
+          >
+            <IconCheck stroke={3} />
+          </motion.span>
+        )}
+        {!copied && (
+          <span className="absolute inset-0">
+            <IconCopy />
+          </span>
+        )}
+      </span>
+      <span className="">{copied ? "copied" : "copy"}</span>
+    </motion.button>
+  );
+};
+
+type StyledLinkProps = {
+  href: string;
+  label: string;
+};
+
+const StyledLink = ({ href, label }: StyledLinkProps) => (
+  <Link
+    target="_blank"
+    href={href}
+    className="font-medium text-sm hover:underline focus-visible:underline text-zinc-500 hover:text-zinc-50 focus-visible:text-zinc-50"
+  >
+    {label}
+  </Link>
+);

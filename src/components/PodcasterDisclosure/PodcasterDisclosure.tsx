@@ -44,25 +44,11 @@ export const PodcasterDisclosure = () => {
           {"and more."}
         </span>
       </span>
-
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         {PODCASTS.map((props) => (
           <LinkTag key={props.label} {...props} />
         ))}
       </div>
-      {/* <div className="flex">
-        {SAMPLE_GUESTS.slice(0, 5).map((guest) => (
-          <Image
-            key={guest.name}
-            alt={"A conversation with " + guest.name}
-            src={guest.thumbnail}
-            width={320}
-            height={180}
-            quality={100}
-            className={clsx("flex object-contain w-full h-full")}
-          />
-        ))}
-      </div> */}
       <div className="relative">
         <FloatingCollage />
       </div>
@@ -86,7 +72,7 @@ const LinkTag = ({
   twGradient,
 }: LinkTagProp) => {
   return (
-    <Link className="flex gap-2" href={link}>
+    <Link className="flex gap-2" target="_blank" href={link}>
       <span
         className={clsx(
           "grid place-items-center rounded-xl min-w-[64px] aspect-square",
@@ -102,41 +88,6 @@ const LinkTag = ({
     </Link>
   );
 };
-
-const PODCASTS: LinkTagProp[] = [
-  {
-    link: "https://open.spotify.com/show/2MAi0BvDc6GTFvKFPXnkCL",
-    icon: <IconBrandSpotify size={36} />,
-    actionLabel: "Listen on",
-    label: "Spotify",
-    twGradient: "bg-gradient-to-r from-green-400 to-emerald-500",
-  },
-  {
-    link: "https://podcasts.apple.com/us/podcast/lex-fridman-podcast/id1434243584",
-    icon: <IconBrandApplePodcast size={36} />,
-    actionLabel: "Listen on",
-    label: "Apple Podcast",
-    twGradient: "bg-gradient-to-r from-purple-400 to-fuchsia-500",
-  },
-  {
-    link: "https://www.youtube.com/@lexfridman/featured",
-    icon: <IconBrandYoutube size={36} />,
-    actionLabel: "Listen on",
-    label: "Youtube",
-    twGradient: "bg-gradient-to-r from-red-400 to-rose-500",
-  },
-  {
-    link: "https://lexfridman.com/feed/podcast/",
-    icon: <IconRss size={36} stroke={3} />,
-    actionLabel: "Subscribe via",
-    label: "RSS Feed",
-    twGradient: "bg-gradient-to-r from-orange-500 to-yellow-500",
-  },
-];
-
-const getId = (link: string) => link.slice(link.indexOf("=") + 1);
-const getThumbnailLink = (videoUrl: string) =>
-  `https://img.youtube.com/vi/${getId(videoUrl)}/maxresdefault.jpg`;
 
 const FloatingCollage = () => {
   return (
@@ -192,3 +143,38 @@ const FloatingCollage = () => {
     </motion.div>
   );
 };
+
+const PODCASTS: LinkTagProp[] = [
+  {
+    link: "https://open.spotify.com/show/2MAi0BvDc6GTFvKFPXnkCL",
+    icon: <IconBrandSpotify size={36} />,
+    actionLabel: "Listen on",
+    label: "Spotify",
+    twGradient: "bg-gradient-to-r from-green-400 to-emerald-500",
+  },
+  {
+    link: "https://podcasts.apple.com/us/podcast/lex-fridman-podcast/id1434243584",
+    icon: <IconBrandApplePodcast size={36} />,
+    actionLabel: "Listen on",
+    label: "Apple Podcast",
+    twGradient: "bg-gradient-to-r from-purple-400 to-fuchsia-500",
+  },
+  {
+    link: "https://www.youtube.com/@lexfridman/featured",
+    icon: <IconBrandYoutube size={36} />,
+    actionLabel: "Listen on",
+    label: "Youtube",
+    twGradient: "bg-gradient-to-r from-red-400 to-rose-500",
+  },
+  {
+    link: "https://lexfridman.com/feed/podcast/",
+    icon: <IconRss size={36} stroke={3} />,
+    actionLabel: "Subscribe via",
+    label: "RSS Feed",
+    twGradient: "bg-gradient-to-r from-orange-500 to-yellow-500",
+  },
+];
+
+const getId = (link: string) => link.slice(link.indexOf("=") + 1);
+const getThumbnailLink = (videoUrl: string) =>
+  `https://img.youtube.com/vi/${getId(videoUrl)}/maxresdefault.jpg`;

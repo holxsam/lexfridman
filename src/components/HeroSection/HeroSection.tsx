@@ -43,14 +43,17 @@ const animProps: AnimationProps = {
 export const HeroSection = () => {
   const [section, setSection] = useState(0);
   const [pauseSlider, setPauseSlider] = useState(false);
-  const sectionSelected = section >= 0 && section <= 3;
   const mounted = useHasMounted();
+
+  // derived state:
+  const nextIndex = (section + 1) % sections.length;
+  const nextSlide = sections[nextIndex]?.label || "";
+  const sectionSelected = section >= 0 && section <= 3;
 
   useEffect(() => {
     let timeout: NodeJS.Timeout;
 
     if (!pauseSlider) {
-      // clearTimeout(timeout);
       timeout = setTimeout(() => {
         setSection((v) => (v + 1) % sections.length);
       }, DURATION);
@@ -120,7 +123,7 @@ export const HeroSection = () => {
                   />
                   <span className="flex gap-1 items-center px-1 font-extralight text-sm uppercase w-full">
                     <span className="">
-                      {pauseSlider ? "stopped" : "autoplaying"}
+                      {pauseSlider ? "stopped" : `next slide ${nextSlide}`}
                     </span>
                     <span className="ml-auto">
                       {pauseSlider ? "click to autoplay" : "click to stop"}
@@ -190,7 +193,6 @@ const BackgroundPlayback = () => {
   }, []);
 
   return (
-    // <div className="-z-10 absolute inset-0 -top-16">
     <>
       <motion.div
         className="absolute inset-x-0 top-0 max-w-[1280px] overflow-hidden lg:bottom-auto lg:right-0 lg:left-auto lg:w-[80%]"
@@ -229,7 +231,6 @@ const BackgroundPlayback = () => {
         />
       </div>
     </>
-    // </div>
   );
 };
 

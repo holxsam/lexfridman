@@ -22,17 +22,17 @@ export const NavMenu = ({ links }: { links: NavItem[] }) => {
             {({ open }) => (
               <ul
                 className={clsx(
-                  "flex min-h-min shadow-lg transition-[transform_opacity] duration-300",
+                  "flex min-h-min transition-[transform_opacity] duration-300",
                   // styles for mobile:
-                  "flex-col gap-0 w-full absolute top-16 left-0 bg-zinc-900/90  py-2",
+                  "flex-col gap-0 w-full absolute top-0 left-0 pt-16 pb-2 bg-black/80 backdrop-blur-[2px] shadow-lg",
                   // styles for desktop:
-                  "sm:flex-row sm:items-center sm:gap-4 sm:w-auto sm:relative sm:top-auto sm:left-auto sm:bg-transparent sm:dark:bg-transparent sm:py-0 sm:shadow-none",
+                  "sm:flex-row sm:items-center sm:gap-4 sm:w-auto sm:relative sm:top-auto sm:left-auto sm:bg-transparent sm:py-0 sm:shadow-none sm:backdrop-blur-none",
                   // on mobile show list depending on open:
                   open
-                    ? "visible opacity-100"
-                    : "[visibility:hidden] opacity-0",
+                    ? "visible opacity-100 translate-y-0"
+                    : "[visibility:hidden] opacity-0 -translate-y-1/2",
                   // on desktop ALWAYS show the list:
-                  "sm:visible sm:scale-y-100 sm:opacity-100"
+                  "sm:visible sm:scale-y-100 sm:opacity-100 sm:translate-y-0"
                 )}
               >
                 {links.map((link) => (
