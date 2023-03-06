@@ -10,6 +10,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Fragment, ReactNode } from "react";
 import { SAMPLE_GUESTS } from "./data";
+import { motion } from "framer-motion";
 
 export const PodcasterDisclosure = () => {
   return (
@@ -62,6 +63,9 @@ export const PodcasterDisclosure = () => {
           />
         ))}
       </div> */}
+      <div className="relative">
+        <FloatingCollage />
+      </div>
     </div>
   );
 };
@@ -133,3 +137,58 @@ const PODCASTS: LinkTagProp[] = [
 const getId = (link: string) => link.slice(link.indexOf("=") + 1);
 const getThumbnailLink = (videoUrl: string) =>
   `https://img.youtube.com/vi/${getId(videoUrl)}/maxresdefault.jpg`;
+
+const FloatingCollage = () => {
+  return (
+    <motion.div
+      initial={{ x: "100%", opacity: 0 }}
+      animate={{
+        x: "-150%",
+        opacity: 1,
+        transition: { delay: 0.2, bounce: 1 },
+      }}
+      exit={{ x: "100%", opacity: 0 }}
+      className="absolute inset-0 flex flex-col pt-4"
+    >
+      <div className="flex flex-col gap-4">
+        <motion.div
+          // key={i}
+          animate={{ x: ["0%", "-100%"] }}
+          transition={{
+            ease: "linear",
+            duration: 20,
+            repeatType: "reverse",
+            repeat: Infinity,
+          }}
+          className="flex gap-4"
+        >
+          {SAMPLE_GUESTS.map((item) => (
+            <Link
+              key={item.name}
+              href={item.videoUrl}
+              target="_blank"
+              className="flex min-w-[375px] min-h-[210px]"
+            >
+              <Image
+                // key={item.title}
+                src={item.thumbnail}
+                alt={item.name}
+                width={375}
+                height={210}
+                quality={100}
+                className={clsx(
+                  "relative flex rounded-2xl object-contain",
+                  "transition-[opacity] duration-300 hover:opacity-80 opacity-10"
+                )}
+                style={{
+                  width: 375,
+                  height: 210,
+                }}
+              />
+            </Link>
+          ))}
+        </motion.div>
+      </div>
+    </motion.div>
+  );
+};

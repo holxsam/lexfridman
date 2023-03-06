@@ -1,9 +1,10 @@
 "use client";
 
-/**
-  Teacher:
-  show video of courses he teaches
- */
+import clsx from "clsx";
+import Image from "next/image";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { LECTURES } from "./data";
 
 export const TeacherDisclosure = () => {
   return (
@@ -35,6 +36,72 @@ export const TeacherDisclosure = () => {
           }
         </span>
       </span>
+      <div className="relative">
+        <FloatingCollage />
+      </div>
     </div>
+  );
+};
+
+const ROWS = 2;
+const ITEMS_PER_ROW = Math.floor(LECTURES.length / ROWS);
+const ITEMS = [...Array(ROWS).keys()].map((i) =>
+  LECTURES.slice(i * ITEMS_PER_ROW, i * ITEMS_PER_ROW + ITEMS_PER_ROW)
+);
+
+const FloatingCollage = () => {
+  return (
+    <motion.div
+      initial={{ x: "-300%", opacity: 0 }}
+      animate={{
+        x: "-200%",
+        opacity: 1,
+        transition: { delay: 0.2, bounce: 1 },
+      }}
+      exit={{ x: "-300%", opacity: 0 }}
+      className="absolute inset-0 flex flex-col"
+    >
+      <div className="flex flex-col gap-4">
+        {ITEMS.map((row, i) => (
+          <motion.div
+            key={i}
+            animate={{ x: i % 2 === 0 ? ["-100%", "0%"] : ["0%", "-100%"] }}
+            transition={{
+              ease: "linear",
+              duration: 20,
+              repeatType: "reverse",
+              repeat: Infinity,
+            }}
+            className="flex gap-4"
+          >
+            {row.map((item) => (
+              <Link
+                key={item.title + item.sectionyear}
+                href={item.video}
+                target="_blank"
+                className="flex min-w-[250px] min-h-[140px]"
+              >
+                <Image
+                  // key={item.title}
+                  src={item.thumbnail}
+                  alt={item.title}
+                  width={250}
+                  height={140}
+                  quality={100}
+                  className={clsx(
+                    "relative flex rounded-2xl object-contain",
+                    "transition-[opacity] duration-300 hover:opacity-80 opacity-10"
+                  )}
+                  style={{
+                    width: 250,
+                    height: 140,
+                  }}
+                />
+              </Link>
+            ))}
+          </motion.div>
+        ))}
+      </div>
+    </motion.div>
   );
 };

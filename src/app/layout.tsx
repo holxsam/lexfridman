@@ -31,12 +31,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={customFonts}>
       <body>
-        <header className="stickyzztop-0 flex flex-col w-full">
+        <header className="flex flex-col w-full">
           <NavBar />
         </header>
         <main className="-z-10 isolate flex-1">{children}</main>
         <footer className="-z-20 isolate ">
-          <Footer />{" "}
+          <Footer />
         </footer>
       </body>
     </html>

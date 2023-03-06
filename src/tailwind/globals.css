@@ -14,6 +14,9 @@
   input[type="number"] {
     -moz-appearance: textfield;
   }
+  img {
+    user-select: none;
+  }
 }
 
 @layer utilities {

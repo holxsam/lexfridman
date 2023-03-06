@@ -64,7 +64,7 @@ export const HeroSection = () => {
   return (
     <section className="-z-10 relative flex flex-col min-h-[calc(100vh-4rem)] mb-96 sm:mb-64 md:mb-40 lg:mb-0">
       <MountedPlayback />
-      <div className="pack-content flex flex-col justify-centerzz flex-1 pt-40">
+      <div className="pack-content flex flex-col flex-1 pt-40 pointer-events-none [&>*]:pointer-events-auto">
         {/* 
           Using grid here instead of flex to solve two issues:
             1. On mobile, the two main containers are stacked on top of each other. 
@@ -85,10 +85,7 @@ export const HeroSection = () => {
                 className="-z-10 absolute top-[50%] left-[10%] w-96 h-72 rounded-full blur-3xl bg-pink-500 opacity-5"
               />
               {sections.map((sec, i) => (
-                <Tab
-                  key={sec.id}
-                  className="flex outline-none appearance-none zzfocus-visible:underline"
-                >
+                <Tab key={sec.id} className="flex outline-none appearance-none">
                   {section === i && (
                     <motion.span
                       initial={{ scale: 0.6, x: mounted ? 50 : 0 }}
@@ -103,9 +100,7 @@ export const HeroSection = () => {
                       "font-extrabold w-min uppercase text-[clamp(40px,10vw,72px)] [line-height:1] transition-[color] duration-500",
                       section === i
                         ? "text-zinc-50"
-                        : section === -1
-                        ? "text-zinc-50"
-                        : "text-zinc-700/80"
+                        : "text-zinc-600/90 sm:text-zinc-700/80"
                     )}
                   >
                     {sec.label}
@@ -173,8 +168,12 @@ export const HeroSection = () => {
 
 const MountedPlayback = () => {
   const mounted = useHasMounted();
-  if (!mounted) return <></>;
-  return <BackgroundPlayback />;
+
+  return (
+    <div id="hero-section-bg" className="-z-10 absolute inset-0 -top-16">
+      {mounted && <BackgroundPlayback />}
+    </div>
+  );
 };
 
 const BackgroundPlayback = () => {
@@ -191,7 +190,8 @@ const BackgroundPlayback = () => {
   }, []);
 
   return (
-    <div className="-z-10 absolute inset-0 -top-16">
+    // <div className="-z-10 absolute inset-0 -top-16">
+    <>
       <motion.div
         className="absolute inset-x-0 top-0 max-w-[1280px] overflow-hidden lg:bottom-auto lg:right-0 lg:left-auto lg:w-[80%]"
         style={{ y, opacity }}
@@ -211,24 +211,25 @@ const BackgroundPlayback = () => {
             ></iframe>
           </div>
         </div>
-        <div className="absolute -inset-[3px] bg-gradient-to-b from-transparent via-zinc-900/50 zzvia-transparent to-zinc-900"></div>
-        <div className="absolute -inset-[3px] hidden bg-gradient-to-l from-transparent via-zinc-900/50 zzvia-transparent to-zinc-900 lg:block"></div>
+        <div className="absolute -inset-[3px] bg-gradient-to-b from-transparent via-zinc-900/50 to-zinc-900"></div>
+        <div className="absolute -inset-[3px] hidden bg-gradient-to-l from-transparent via-zinc-900/50 to-zinc-900 lg:block"></div>
       </motion.div>
-      <div className="z-10 absolute inset-0">
+      <div className="z-10 absolute inset-0 pointer-events-none">
         <Orb
           delay={3}
-          className="absolute -bottom-16 left-[40%] w-[400px] h-72 rounded-full blur-3xl bg-blue-500 opacity-5 "
+          className="absolute -bottom-16 left-[40%] w-[400px] h-72 rounded-full blur-3xl bg-blue-500 opacity-5"
         />
         <Orb
           delay={2}
-          className="absolute -bottom-16 left-[65%] w-52 h-52 rounded-full blur-3xl bg-yellow-500 opacity-5 "
+          className="absolute -bottom-16 left-[65%] w-52 h-52 rounded-full blur-3xl bg-yellow-500 opacity-5"
         />
         <Orb
           delay={1.5}
-          className="absolute bottom-0 -right-32w-[400px] h-52 rounded-full blur-3xl bg-green-500 opacity-5"
+          className="absolute bottom-0 -right-32 w-[400px] h-52 rounded-full blur-3xl bg-green-500 opacity-5"
         />
       </div>
-    </div>
+    </>
+    // </div>
   );
 };
 
@@ -241,7 +242,7 @@ const Orb = ({
 }) => {
   return (
     <motion.div
-      className={className}
+      className={clsx("pointer-events-none", className)}
       animate={{ opacity: [0.05, 0.1] }}
       transition={{
         repeat: Infinity,

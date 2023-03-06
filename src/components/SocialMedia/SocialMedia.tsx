@@ -8,9 +8,11 @@ import { SOCIAL_MEDIA } from "./data";
 const cardVariants: Variants = {
   offscreen: {
     y: 200,
+    opacity: 0,
   },
   onscreen: (i: number) => ({
     y: 0,
+    opacity: 1,
     transition: {
       delay: i * 0.05,
       type: "spring",
@@ -22,8 +24,8 @@ const cardVariants: Variants = {
 
 export const SocialMedia = () => {
   return (
-    <section className="flex items-centerzz w-full min-h-[500px] py-16 bg-gradient-to-b from-zinc-800 to-zinc-900">
-      <div className="pack-content flex flex-col gap-16zz items-center justify-center">
+    <section className="flex w-full min-h-[500px] py-16 bg-gradient-to-b from-zinc-800 to-zinc-900">
+      <div className="pack-content flex flex-col items-center justify-center">
         <p className="flex flex-col">
           <span className="font-extrabold text-3xl sm:text-4xl text-center">
             {"Connect with me"}

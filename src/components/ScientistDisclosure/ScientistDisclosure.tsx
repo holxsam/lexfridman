@@ -39,7 +39,16 @@ export const ScientistDisclosure = () => {
         </span>
       </span>
       <div className="relative w-full pt-8">
-        <div className="absolute flex flex-col gap-4">
+        <motion.div
+          className="absolute flex flex-col gap-4"
+          initial={{ x: "50%", opacity: 0 }}
+          animate={{
+            x: "0%",
+            opacity: 1,
+            transition: { delay: 0.2, bounce: 1 },
+          }}
+          exit={{ x: "50%", opacity: 0 }}
+        >
           <motion.div
             className="flex gap-4"
             animate={{ x: ["0%", "-10%"] }}
@@ -58,7 +67,7 @@ export const ScientistDisclosure = () => {
               <SlideImage key={item.title} item={item} />
             ))}
           </motion.div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

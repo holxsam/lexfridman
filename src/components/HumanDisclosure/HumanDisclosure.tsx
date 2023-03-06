@@ -6,6 +6,7 @@ import {
   IconPlayerPlayFilled,
 } from "@tabler/icons-react";
 import clsx from "clsx";
+import { motion } from "framer-motion";
 import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 import BLACK_BELT from "../../../public/lex-blackbelt.gif";
@@ -38,11 +39,20 @@ export const HumanDisclosure = () => {
         }
       </span>
 
-      <div className="flex flex-col sm:flex-row gap-4">
+      <motion.div
+        initial={{ y: "150%", opacity: 0 }}
+        animate={{
+          y: "0%",
+          opacity: 1,
+          transition: { delay: 0.2, bounce: 1 },
+        }}
+        exit={{ y: "150%", opacity: 0 }}
+        className="flex flex-col items-center sm:items-start gap-4"
+      >
         {PREVIEWS.map((gif) => (
           <GifPreview key={gif.alt} {...gif} />
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 };
@@ -56,7 +66,7 @@ type GifPreviewProps = {
 const GifPreview = ({ image, alt = "", link }: GifPreviewProps) => {
   return (
     <Link
-      className="overflow-hidden rounded-2xl group/gif relative max-w-xs"
+      className="overflow-hidden rounded-2xl group/gif relative max-w-md w-full"
       target="_blank"
       href={link}
     >
@@ -66,13 +76,13 @@ const GifPreview = ({ image, alt = "", link }: GifPreviewProps) => {
         quality={100}
         className={clsx(
           "flex object-contain w-full h-full",
-          "transition-[filter,transform] duration-300 ease-linear scale-100 group-hover/gif:scale-150 group-focus/gif:scale-150"
+          "transition-[filter,transform] duration-200 ease-linear scale-100 group-hover/gif:scale-150 group-focus/gif:scale-150"
         )}
       />
       <div
         className={clsx(
           "absolute inset-0",
-          "transition-[background-color] duration-200 ease-linear bg-zinc-900/0 group-hover/gif:bg-zinc-900/90 group-focus/gif:bg-zinc-900/90"
+          "transition-[background-color] duration-200 ease-linear bg-zinc-900/0 group-hover/gif:bg-zinc-900/80 group-focus/gif:bg-zinc-900/80"
         )}
       ></div>
       <div
@@ -84,7 +94,9 @@ const GifPreview = ({ image, alt = "", link }: GifPreviewProps) => {
         <div className="grid place-items-center w-1/2 h-1/2">
           <IconPlayerPlayFilled size={48} />
         </div>
-        <div className="absolute bottom-2 text-sm">Watch on Youtube</div>
+        <div className="absolute bottom-2 text-base font-bold">
+          Watch on Youtube
+        </div>
       </div>
     </Link>
   );
